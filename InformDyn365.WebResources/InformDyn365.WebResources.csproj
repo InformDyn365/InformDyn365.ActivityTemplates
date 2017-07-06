@@ -43,11 +43,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="images\isc_Template_16.png" />
-    <Content Include="images\isc_Template_32.png" />
-    <Content Include="isc_SelectTemplate.html" />
-    <Content Include="isc_ShowEntityFields.html" />
-    <Content Include="scripts\isc_CustomActivityTemplate.js" />
+    <Content Include="images\InformDyn365_Template_16.png" />
+    <Content Include="images\InformDyn365_Template_32.png" />
+    <Content Include="InformDyn365_SelectTemplate.html" />
+    <Content Include="InformDyn365_ShowEntityFields.html" />
+    <Content Include="scripts\InformDyn365_CustomActivityTemplate.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

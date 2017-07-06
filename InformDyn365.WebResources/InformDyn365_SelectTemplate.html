@@ -55,17 +55,17 @@
 
                 // Setup FetchXML to query for templates related to this entityType
                 var fetchXml = "<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>" +
-                  "<entity name='isc_customactivitytemplate'>" +
-                    "<attribute name='isc_templatename' />" +
-                    "<attribute name='isc_customactivitytemplateid' />" +
-                    "<order attribute='isc_templatename' descending='false' />" +
+                  "<entity name='informdyn365_customactivitytemplate'>" +
+                    "<attribute name='informdyn365_templatename' />" +
+                    "<attribute name='informdyn365_customactivitytemplateid' />" +
+                    "<order attribute='informdyn365_templatename' descending='false' />" +
                     "<filter type='and'>" +
                         "<condition attribute='statecode' operator='eq' value='0' />" +
-                        "<condition attribute='isc_customentityname' operator='eq' value='" + gRegardingObjectEntityType + "' />" +
+                        "<condition attribute='informdyn365_customentityname' operator='eq' value='" + gRegardingObjectEntityType + "' />" +
                     "</filter>" + "</entity>" + "</fetch>";
 
                 var clientURL = parent.Xrm.Page.context.getClientUrl();
-                var escapedURL = clientURL + "/api/data/v8.0/isc_customactivitytemplates?fetchXml=" + encodeURI(fetchXml);
+                var escapedURL = clientURL + "/api/data/v8.1/informdyn365_customactivitytemplates?fetchXml=" + encodeURI(fetchXml);
 
                 // Query for Related Templates
                 $.ajax({
@@ -97,8 +97,8 @@
 
                         // Loop through the list of available templates and add to the table
                         for (var i = 0; i < results.length; i++) {
-                            var templateName = retrievedTemplates[i]["isc_templatename"];
-                            var templateId = retrievedTemplates[i]["isc_customactivitytemplateid"];
+                            var templateName = retrievedTemplates[i]["informdyn365_templatename"];
+                            var templateId = retrievedTemplates[i]["informdyn365_customactivitytemplateid"];
                             templateId = removeBraces(templateId);
 
                             var row = $("<tr />")
@@ -211,7 +211,7 @@
 
         function retrieveTemplate(templateId) {
             var clientURL = parent.Xrm.Page.context.getClientUrl();
-            clientURL += "/api/data/v8.0/isc_customactivitytemplates(" + removeBraces(templateId) + ")?$select=isc_templatebody,isc_templatesubject";
+            clientURL += "/api/data/v8.0/informdyn365_customactivitytemplates(" + removeBraces(templateId) + ")?$select=informdyn365_templatebody,informdyn365_templatesubject";
 
             $.ajax({
                 type: "GET",
@@ -229,19 +229,19 @@
                     var result = data;
 
                     // Need to convert the line returns to HTML <br> tags
-                    var isc_templatebody = convertToHTML(result["isc_templatebody"]);
-                    var isc_templatesubject = result["isc_templatesubject"];
+                    var informdyn365_templatebody = convertToHTML(result["informdyn365_templatebody"]);
+                    var informdyn365_templatesubject = result["informdyn365_templatesubject"];
 
                     // Process the text and grab the merge fields out
-                    var strFields = getArrayofFields(isc_templatebody, isc_templatesubject);
+                    var strFields = getArrayofFields(informdyn365_templatebody, informdyn365_templatesubject);
 
                     // Get the related record to grab data from it for this template
-                    isc_template = retrieveRelatedRecord(
+                    informdyn365_template = retrieveRelatedRecord(
                         parent.Xrm.Page.getAttribute('regardingobjectid').getValue()[0].entityType,
                         parent.Xrm.Page.getAttribute('regardingobjectid').getValue()[0].id,
                         strFields,
-                        isc_templatebody,
-                        isc_templatesubject);
+                        informdyn365_templatebody,
+                        informdyn365_templatesubject);
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     handleError("retrieveTemplate", xhr, textStatus, errorThrown)

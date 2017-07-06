@@ -48,7 +48,7 @@
         function getEntityList() {
 
             // Get this to use later
-            var isc_CustomEntityName = parent.Xrm.Page.getAttribute('isc_customentityname').getValue();
+            var informdyn365_CustomEntityName = parent.Xrm.Page.getAttribute('informdyn365_customentityname').getValue();
 
             // Query all entities 
             $.ajax({
@@ -147,14 +147,14 @@
                         }
 
                         //// if the entity name is already in the form, select that one
-                        //if (isc_CustomEntityName != null && logicalName.toString().toLowerCase() == isc_CustomEntityName.toString().toLowerCase()) {
+                        //if (informdyn365_CustomEntityName != null && logicalName.toString().toLowerCase() == informdyn365_CustomEntityName.toString().toLowerCase()) {
                         //    $("#entityList").append($("<option value='" + metadataId + "' selected>" + schemaName + " ( " + logicalName + " )</option>"));
                         //    getFieldList(null, metadataId);
                         //}
                         //else {
                         //    $("#entityList").append($("<option value='" + metadataId + "'>" + schemaName + " ( " + logicalName + " )</option>"));
                         //}
-                        doesEntityAllowActivities(logicalName, isc_CustomEntityName, metadataId, schemaName);
+                        doesEntityAllowActivities(logicalName, informdyn365_CustomEntityName, metadataId, schemaName);
                     }
                     
                     $("#divLoading").hide();
@@ -167,7 +167,7 @@
 
         }; // End getEntityList
 
-        function doesEntityAllowActivities(logicalName, isc_CustomEntityName, metadataId, schemaName) {
+        function doesEntityAllowActivities(logicalName, informdyn365_CustomEntityName, metadataId, schemaName) {
 
             $.ajax({
                 type: "GET",
@@ -190,7 +190,7 @@
                         var testVal = schemaName1.indexOf("ActivityPointers");
                         if (schemaName1.indexOf("ActivityPointers") > -1) {
                             // debugger;
-                            if (isc_CustomEntityName != null && logicalName.toString().toLowerCase() == isc_CustomEntityName.toString().toLowerCase()) {
+                            if (informdyn365_CustomEntityName != null && logicalName.toString().toLowerCase() == informdyn365_CustomEntityName.toString().toLowerCase()) {
                                 $("#entityList").append($("<option value='" + metadataId + "' selected>" + schemaName + " ( " + logicalName + " )</option>"));
                                 getFieldList(null, metadataId);
                             }
@@ -291,11 +291,11 @@
                         row.append($("<td ondblclick=\"cellClicked('" + logicalName + "')\">" + friendlyName + "</td>"));
 
                     }
-                    var isc_CustomEntityName = parent.Xrm.Page.getAttribute('isc_customentityname').getValue();
+                    var informdyn365_CustomEntityName = parent.Xrm.Page.getAttribute('informdyn365_customentityname').getValue();
                     if (data.LogicalName != null
-                        && isc_CustomEntityName != null
-                        && data.LogicalName.toLowerCase() != isc_CustomEntityName.toLowerCase()) {
-                        parent.Xrm.Page.getAttribute('isc_customentityname').setValue(data.LogicalName.toLowerCase());
+                        && informdyn365_CustomEntityName != null
+                        && data.LogicalName.toLowerCase() != informdyn365_CustomEntityName.toLowerCase()) {
+                        parent.Xrm.Page.getAttribute('informdyn365_customentityname').setValue(data.LogicalName.toLowerCase());
                     }
                     $("#divLoading").hide();
                     $("#divFieldTable").show();
@@ -310,7 +310,7 @@
 
         function cellClicked(fieldName) {
             // alert(fieldName);
-            var currentDescription = parent.Xrm.Page.getAttribute('isc_templatebody').getValue();
+            var currentDescription = parent.Xrm.Page.getAttribute('informdyn365_templatebody').getValue();
             if (currentDescription != null) {
                 // If there is some existing Text in the description field, just append it
                 currentDescription += " " + fieldName;
@@ -319,7 +319,7 @@
                 currentDescription = fieldName;
             }
 
-            parent.Xrm.Page.getAttribute('isc_templatebody').setValue(currentDescription);
+            parent.Xrm.Page.getAttribute('informdyn365_templatebody').setValue(currentDescription);
         }; // end cellClicked
 
     </script>
