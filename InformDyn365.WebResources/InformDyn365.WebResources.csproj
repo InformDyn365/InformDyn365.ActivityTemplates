@@ -43,6 +43,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\isc_Template_16.png" />
+    <Content Include="images\isc_Template_32.png" />
+    <Content Include="isc_SelectTemplate.html" />
+    <Content Include="isc_ShowEntityFields.html" />
+    <Content Include="scripts\isc_CustomActivityTemplate.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -55,8 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="css\" />
-    <Folder Include="images\" />
-    <Folder Include="scripts\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">
